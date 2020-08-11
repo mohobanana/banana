@@ -1,5 +1,7 @@
 package org.banana.demo.service;
 
+import org.banana.api.dto.TestFunctionOutDto;
+
 public interface TestService {
-    public String testMethod(String msg);
+    public TestFunctionOutDto testMethod(String msg);
 }

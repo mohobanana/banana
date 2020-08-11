@@ -19,10 +19,5 @@
             <artifactId>banana-common</artifactId>
             <version>${parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>${groupId}</groupId>
-            <artifactId>banana-demo</artifactId>
-            <version>${parent.version}</version>
-        </dependency>
     </dependencies>
 </project>

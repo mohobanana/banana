@@ -1,6 +1,7 @@
 package org.banana.common.utils;
 
 
+import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,6 +29,11 @@ public class PrintUtil {
         }
         stringBuilder.append("}]");
         return stringBuilder.toString();
+    }
+    public static String toJsonString(Object obj){
+        String s = JSONObject.toJSON(obj).toString();
+        logger.info(s);
+        return s;
     }
     public static void printInfoLog(String msg) {
         logger.info("{}",msg);

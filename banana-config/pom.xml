@@ -15,12 +15,17 @@
     <dependencies>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>banana-api</artifactId>
+            <artifactId>banana-common</artifactId>
             <version>${parent.version}</version>
         </dependency>
         <dependency>
             <groupId>${groupId}</groupId>
-            <artifactId>banana-common</artifactId>
+            <artifactId>banana-demo</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>banana-api</artifactId>
             <version>${parent.version}</version>
         </dependency>
     </dependencies>
