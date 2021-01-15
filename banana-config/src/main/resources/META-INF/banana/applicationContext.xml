@@ -13,7 +13,7 @@
     <import resource="classpath:META-INF/banana/common/datasource.xml"/>
     <!--    注解-->
     <context:annotation-config/>
-    <context:component-scan base-package="org.banana.demo,org.banana.common.utils"/>
+    <context:component-scan base-package="org.banana.demo,org.banana.common"/>
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="dataSource" ref="dataSource" />
         <property name="objectWrapperFactory">
@@ -23,6 +23,6 @@
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="org.moho.mapper" />
+        <property name="basePackage" value="org.banana.demo.mapper" />
     </bean>
 </beans>

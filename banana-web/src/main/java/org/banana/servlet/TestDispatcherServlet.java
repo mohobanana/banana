@@ -2,6 +2,7 @@ package org.banana.servlet;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.commons.beanutils.BeanUtils;
+import org.apache.logging.log4j.core.jackson.Log4jJsonObjectMapper;
 import org.banana.common.annotation.Function;
 import org.banana.common.annotation.Functions;
 import org.slf4j.Logger;
