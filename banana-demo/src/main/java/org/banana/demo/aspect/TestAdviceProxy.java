@@ -1,6 +1,7 @@
-package org.banana.common.aspect;
+package org.banana.demo.aspect;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -18,7 +19,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Aspect
-@EnableAspectJAutoProxy
+@EnableAspectJAutoProxy()
 public class TestAdviceProxy {
     private static Logger logger = LoggerFactory.getLogger(TestAdviceProxy.class);
 
@@ -33,4 +34,13 @@ public class TestAdviceProxy {
         logger.info(aClass.getSimpleName());
         PrintUtil.toJsonString(args);
     }
+
+//    @Pointcut("execution(* org.banana.demo.*())")
+//    public void allPointCut() {
+//    }
+//    @Before("allPointCut()")
+//    public void debugCall(JoinPoint joinPoint){
+//        Signature signature = joinPoint.getSignature();
+//        logger.info(signature.getClass()+"."+signature.getName()+ " executing...");
+//    }
 }

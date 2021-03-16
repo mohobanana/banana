@@ -7,7 +7,11 @@ import org.banana.common.annotation.Function;
 import org.banana.common.annotation.Functions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.aop.framework.AdvisedSupport;
+import org.springframework.aop.framework.AopProxy;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.context.ApplicationContext;
+import org.springframework.util.ClassUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletContext;
@@ -16,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
@@ -46,9 +51,10 @@ public class TestDispatcherServlet extends HttpServlet {
             Class functionClass = function.getClass();
             Method[] methods = functionClass.getDeclaredMethods();
             for(Method method:methods){
-                if(method.getDeclaredAnnotation(Function.class)!=null){
-                    methodMap.put(method.getName(),method);
-                    methodFunctionMap.put(method.getName(),function);
+                Method originMethod = ClassUtils.getMostSpecificMethod(method,functionClass.getSuperclass() );
+                if(originMethod.getDeclaredAnnotation(Function.class)!=null){
+                    methodMap.put(originMethod.getName(),method);
+                    methodFunctionMap.put(originMethod.getName(),function);
                 }
             }
         }
@@ -101,5 +107,27 @@ public class TestDispatcherServlet extends HttpServlet {
 //            writer = resp.getWriter();
 //            writer.write();
 //        }
+    }
+
+    private Object getTargetObject(Object proxy) throws Exception {
+
+        if(!AopUtils.isAopProxy(proxy)) { //判断是否是代理类
+            return proxy;
+        }
+
+        return getTargetObject(getProxyTargetObject(proxy));
+
+
+
+    }
+
+
+    private Object getProxyTargetObject(Object proxy) throws Exception {
+        Field h = proxy.getClass().getSuperclass().getDeclaredField("h");
+        h.setAccessible(true);
+        AopProxy aopProxy = (AopProxy) h.get(proxy);
+        Field advised = aopProxy.getClass().getDeclaredField("advised");
+        advised.setAccessible(true);
+        return  ((AdvisedSupport)advised.get(aopProxy)).getTargetSource().getTarget();
     }
 }

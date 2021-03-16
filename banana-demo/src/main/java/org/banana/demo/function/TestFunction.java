@@ -4,6 +4,7 @@ import org.banana.api.dto.TestFunctionInDto;
 import org.banana.api.dto.TestFunctionOutDto;
 import org.banana.common.annotation.Function;
 import org.banana.common.annotation.Functions;
+import org.banana.common.annotation.PointCutAnno;
 import org.banana.demo.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,7 @@ public class TestFunction {
     private TestService testService;
 
     @Function
-    public TestFunctionOutDto testFunction(TestFunctionInDto inDto){
+    public TestFunctionOutDto test1(TestFunctionInDto inDto){
         return testService.testMethod(inDto.getMsg());
     }
 }
