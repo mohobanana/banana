@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TestServiceImpl implements TestService {
 
+    @Override
     public TestFunctionOutDto testMethod(String msg) {
         TestFunctionOutDto outDto = new TestFunctionOutDto();
         outDto.setMsg(msg);

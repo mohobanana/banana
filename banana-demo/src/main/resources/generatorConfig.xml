@@ -8,7 +8,7 @@
 <!--        <plugin type="generator.MysqlPaginationPlugin" />-->
 <!--        <plugin type="org.mybatis.generator.plugins.ToStringPlugin" />-->
 <!--        <plugin type="org.mybatis.generator.plugins.SerializablePlugin" />-->
-        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/demo"
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/study"
                         userId="root"
                         password="password">
         </jdbcConnection>

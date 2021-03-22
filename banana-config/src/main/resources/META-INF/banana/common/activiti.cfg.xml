@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="processEngineConfiguration" class="org.activiti.spring.SpringProcessEngineConfiguration">
+        <!-- 配置第三方连接池 -->
+        <property name="dataSource" ref="dataSource"/>
+        <!--
+            databaseSchemaUpdate: 设置流程引擎启动和关闭时如何处理数据库表
+            false:(默认) 检查数据库的版本和依赖库的版本，如果版本不匹配就抛出异常。
+            true：构建流程引擎时，执行检查，如果需要就执行更新，如果不存在就创建
+            create-drop：构建流程引擎时创建数据库表，关闭流程引擎时就删除这些表
+         -->
+        <property name="databaseSchemaUpdate" value="true"/>
+        <!-- 是否启动任务调用 -->
+        <property name="jobExecutorActivate" value="false"/>
+        <property name="transactionManager" ref="transactionManager" />
+        <property name="deploymentResources">
+            <list>
+                <value>classpath*:META-INF/banana/diagram/*.bpmn</value>
+            </list>
+        </property>
+        <property name="activityFontName" value="宋体"/>
+        <property name="labelFontName" value="宋体"/>
+    </bean>
+    <bean id="processEngine" class="org.activiti.spring.ProcessEngineFactoryBean">
+        <property name="processEngineConfiguration" ref="processEngineConfiguration" />
+    </bean>
+    <bean id="repositoryService" factory-bean="processEngine"
+          factory-method="getRepositoryService" />
+    <bean id="runtimeService" factory-bean="processEngine"
+          factory-method="getRuntimeService" />
+    <bean id="taskService" factory-bean="processEngine"
+          factory-method="getTaskService" />
+    <bean id="historyService" factory-bean="processEngine"
+          factory-method="getHistoryService" />
+    <bean id="managementService" factory-bean="processEngine"
+          factory-method="getManagementService" />
+    <bean id="IdentityService" factory-bean="processEngine"
+          factory-method="getIdentityService" />
+</beans>
