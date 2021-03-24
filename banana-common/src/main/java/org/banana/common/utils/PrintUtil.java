@@ -4,30 +4,29 @@ package org.banana.common.utils;
 import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.helpers.FormattingTuple;
+import org.slf4j.helpers.MessageFormatter;
 
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class PrintUtil {
     private static Logger logger = LoggerFactory.getLogger(PrintUtil.class);
     public static String printFields(Object obj) {
         StringBuilder stringBuilder = new StringBuilder();
-        Class clazz = obj.getClass();
-        stringBuilder.append("["+obj.toString()+":{");
-        Field[] fields = clazz.getDeclaredFields();
-        for (Field field : fields) {
-            try {
-                PropertyDescriptor pd = null;
-                pd = new PropertyDescriptor(field.getName(),clazz);
-                Method method = pd.getReadMethod();
-                String value = method.invoke(obj).toString();
-                stringBuilder.append(field.getName()+":"+value+";");
-            } catch (Exception e) {
-                logger.error(e.getMessage());
+        if (obj instanceof List){
+            stringBuilder.append("[");
+            List list = (List)obj;
+            for (Object o : list) {
+                stringBuilder.append("{"+toJsonString(o)+"},\n");
             }
+            stringBuilder.deleteCharAt(stringBuilder.length()-1);
+            stringBuilder.append("]");
+        } else {
+            stringBuilder.append(toJsonString(obj));
         }
-        stringBuilder.append("}]");
         return stringBuilder.toString();
     }
     public static String toJsonString(Object obj){
@@ -35,7 +34,8 @@ public class PrintUtil {
         logger.info(s);
         return s;
     }
-    public static void printInfoLog(String msg) {
-        logger.info("{}",msg);
+    public static String formatString(String format,String[] args) {
+        FormattingTuple ft = MessageFormatter.arrayFormat(format, args);
+        return ft.getMessage();
     }
 }

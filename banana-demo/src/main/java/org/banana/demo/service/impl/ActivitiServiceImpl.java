@@ -24,8 +24,6 @@ public class ActivitiServiceImpl implements ActivitiService {
     private HistoryService historyService; //历史管理(执行完的数据的管理)
     @Autowired
     private IdentityService identityService; //组织机构管理
-    @Autowired
-    private FormService formService; //个可选服务，任务表单管理
 
     @Override
     public void genTask(String userId) {

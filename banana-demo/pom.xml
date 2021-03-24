@@ -23,6 +23,11 @@
             <artifactId>banana-api</artifactId>
             <version>${parent.version}</version>
         </dependency>
+        <dependency>
+            <groupId>${groupId}</groupId>
+            <artifactId>banana-workflow</artifactId>
+            <version>${parent.version}</version>
+        </dependency>
     </dependencies>
 
 
