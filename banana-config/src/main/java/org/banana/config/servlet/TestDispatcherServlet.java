@@ -83,13 +83,14 @@ public class TestDispatcherServlet extends HttpServlet {
         }
         br.close();
         JSONObject jsonObject = JSONObject.parseObject(sb.toString());
-//        Map<String, String[]> reqMap = req.getParameterMap();
+        Map<String, String[]> reqMap = req.getParameterMap();
         Object result  = null;
         Class[] classes = method.getParameterTypes();
         Object reqParam = null;
         try {
             reqParam = classes[0].newInstance();
             BeanUtils.populate(reqParam,jsonObject);
+            BeanUtils.populate(reqParam,reqMap);
         } catch (Exception e) {
             e.printStackTrace();
         }
