@@ -137,9 +137,5 @@ public class TestTaskService {
         System.out.println("===complete==="+taskList.get(0).getTaskDefinitionKey());
         taskService.complete(taskList.get(0).getId(),vars);
         System.out.println("===completeDown==="+taskList.get(0).getTaskDefinitionKey());
-        taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
-        System.out.println("===complete==="+taskList.get(0).getTaskDefinitionKey());
-        taskService.complete(taskList.get(0).getId(),vars);
-        System.out.println("===completeDown==="+taskList.get(0).getTaskDefinitionKey());
     }
 }
