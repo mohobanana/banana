@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:activiti="http://activiti.org/bpmn"
+             xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:tns="http://www.activiti.org/test"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             expressionLanguage="http://www.w3.org/1999/XPath"
+             id="m1621407544512"
+             name=""
+             targetNamespace="http://www.activiti.org/test"
+             typeLanguage="http://www.w3.org/2001/XMLSchema">
+   <process  id="myProcess_2" isClosed="false" isExecutable="true"
+            processType="None">
+      <startEvent id="_2" name="StartEvent"/>
+      <userTask activiti:candidateGroups="${groupId}" activiti:exclusive="true" id="commit"
+                name="commit">
+      </userTask>
+      <endEvent id="_4" name="EndEvent"/>
+      <userTask activiti:candidateUsers="${assignee}"
+                activiti:exclusive="true"
+                id="submit"
+                name="submit">
+      </userTask>
+      <sequenceFlow id="_5" sourceRef="_2" targetRef="submit"/>
+      <sequenceFlow id="_6" sourceRef="submit" targetRef="commit"/>
+      <sequenceFlow id="_7" sourceRef="commit" targetRef="_4"/>
+      <sequenceFlow id="_3" sourceRef="commit" targetRef="submit">
+         <conditionExpression xsi:type="tFormalExpression">${action=="R"}</conditionExpression>
+      </sequenceFlow>
+   </process>
+   <bpmndi:BPMNDiagram 
+                       documentation="background=#3C3F41;count=1;horizontalcount=1;orientation=0;width=842.4;height=1195.2;imageableWidth=832.4;imageableHeight=1185.2;imageableX=5.0;imageableY=5.0"
+                       id="Diagram-_1"
+                       name="New Diagram">
+      <bpmndi:BPMNPlane bpmnElement="myProcess_1">
+         <bpmndi:BPMNShape bpmnElement="_2" id="Shape-_2">
+            <omgdc:Bounds height="32.0" width="32.0" x="355.0" y="85.0"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="commit" id="Shape-commit">
+            <omgdc:Bounds height="55.0" width="85.0" x="335.0" y="310.0"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="_4" id="Shape-_4">
+            <omgdc:Bounds height="32.0" width="32.0" x="390.0" y="455.0"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="32.0" width="32.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNShape bpmnElement="submit" id="Shape-submit">
+            <omgdc:Bounds height="55.0" width="85.0" x="325.0" y="205.0"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="55.0" width="85.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNShape>
+         <bpmndi:BPMNEdge bpmnElement="_3" id="BPMNEdge__3" sourceElement="commit" targetElement="submit">
+            <omgdi:waypoint x="420.0" y="337.5"/>
+            <omgdi:waypoint x="485.0" y="285.0"/>
+            <omgdi:waypoint x="410.0" y="232.5"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="_5" id="BPMNEdge__5" sourceElement="_2" targetElement="submit">
+            <omgdi:waypoint x="371.0" y="117.0"/>
+            <omgdi:waypoint x="371.0" y="205.0"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="_6" id="BPMNEdge__6" sourceElement="submit" targetElement="commit">
+            <omgdi:waypoint x="372.5" y="260.0"/>
+            <omgdi:waypoint x="372.5" y="310.0"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNEdge>
+         <bpmndi:BPMNEdge bpmnElement="_7" id="BPMNEdge__7" sourceElement="commit" targetElement="_4">
+            <omgdi:waypoint x="405.0" y="365.0"/>
+            <omgdi:waypoint x="405.0" y="455.0312805773287"/>
+            <bpmndi:BPMNLabel>
+               <omgdc:Bounds height="0.0" width="0.0" x="0.0" y="0.0"/>
+            </bpmndi:BPMNLabel>
+         </bpmndi:BPMNEdge>
+      </bpmndi:BPMNPlane>
+   </bpmndi:BPMNDiagram>
+</definitions>
