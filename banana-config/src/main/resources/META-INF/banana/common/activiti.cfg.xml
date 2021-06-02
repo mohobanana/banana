@@ -16,7 +16,7 @@
          -->
         <property name="databaseSchemaUpdate" value="true"/>
         <!-- 是否启动任务调用 -->
-        <property name="jobExecutorActivate" value="false"/>
+<!--        <property name="jobExecutorActivate" value="false"/>-->
         <property name="transactionManager" ref="transactionManager" />
         <property name="deploymentResources">
             <list>

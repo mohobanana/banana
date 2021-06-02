@@ -18,7 +18,7 @@
     </modules>
 
     <properties>
-        <spring-version>4.0.0.RELEASE</spring-version>
+        <spring-version>4.3.10.RELEASE</spring-version>
         <slf4j.version>1.7.7</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <activiti.version>6.0.0</activiti.version>
@@ -29,6 +29,11 @@
             <artifactId>junit</artifactId>
             <version>4.13</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.9.5</version>
         </dependency>
         <!--        activiti-->
         <dependency>
@@ -46,6 +51,11 @@
             <artifactId>activiti-rest</artifactId>
             <version>${activiti.version}</version>
         </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.activiti</groupId>-->
+<!--            <artifactId>activiti-dmn-engine</artifactId>-->
+<!--            <version>${activiti.version}</version>-->
+<!--        </dependency>-->
         <!--         spring依赖-->
         <dependency>
             <groupId>org.springframework</groupId>

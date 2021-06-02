@@ -136,7 +136,7 @@ public class TestTaskService {
 //        System.out.println(a);
         Map<String, Object> vars = new HashMap<>(); //参数
         vars.put("assignee","haha");
-        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("myProcess_2",vars);
+        ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("bananaDiagram",vars);
         List<Task> taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
 //        List<String> candidateList = new ArrayList<>();
 //        candidateList.add("a1,a2,a3");
@@ -144,11 +144,15 @@ public class TestTaskService {
 //        vars = new HashMap<>();
 //        vars.put("candidateList",candidateList);
 //        taskService.setAssignee(taskList.get(0).getId(),"haha");
-        taskService.delegateTask(taskList.get(0).getId(),"xixi");
+//        taskService.delegateTask(taskList.get(0).getId(),"xixi");
 //        taskService.delegateTask(taskList.get(0).getId(),"hehe");
 //        taskService.delegateTask(taskList.get(0).getId(),"heihei");
-        taskService.resolveTask(taskList.get(0).getId());
-//        taskService.complete(taskList.get(0).getId(),vars);
+//        taskService.resolveTask(taskList.get(0).getId());
+        taskService.complete(taskList.get(0).getId(),vars);
+        taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
+        taskService.complete(taskList.get(0).getId(),vars);
+        taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
+        taskService.complete(taskList.get(0).getId(),vars);
 //        taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
 //        vars = new HashMap<>();
 //        vars.put("action","R");

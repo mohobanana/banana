@@ -21,16 +21,12 @@ public class MyExecutionListener implements ExecutionListener, TaskListener {
     public void notify(DelegateExecution execution){
         String eventName = execution.getEventName();
         //start
-        if ("start".equals(eventName)) {
-            List<String> candidateList = new ArrayList<>();
-            candidateList.add("a1,a2,a3");
-            candidateList.add("b1,b2");
-            execution.setVariableLocal("candidateList",candidateList);
-            System.out.println("start=========");
-        } else if ("end".equals(eventName)) {
-            System.out.println("end=========");
-        } else if ("take".equals(eventName)) {
-            System.out.println("take=========");
+        if (ExecutionListener.EVENTNAME_START.equals(eventName)) {
+            System.out.println("start========="+execution.getCurrentActivityId());
+        } else if (ExecutionListener.EVENTNAME_END.equals(eventName)) {
+            System.out.println("end==========="+execution.getCurrentActivityId());
+        } else if (ExecutionListener.EVENTNAME_TAKE.equals(eventName)) {
+            System.out.println("take=========="+execution.getCurrentActivityId());
         }
     }
 
@@ -38,14 +34,14 @@ public class MyExecutionListener implements ExecutionListener, TaskListener {
     //实现TaskListener中的方法
     public void notify(DelegateTask delegateTask) {
         String eventName = delegateTask.getEventName();
-        if ("create".endsWith(eventName)) {
-            System.out.println("create=========");
-        } else if ("assignment".endsWith(eventName)) {
-            System.out.println("assignment========");
-        } else if ("complete".endsWith(eventName)) {
-            System.out.println("complete===========");
-        } else if ("delete".endsWith(eventName)) {
-            System.out.println("delete=============");
+        if (TaskListener.EVENTNAME_CREATE.endsWith(eventName)) {
+            System.out.println("create============="+delegateTask.getTaskDefinitionKey());
+        } else if (TaskListener.EVENTNAME_ASSIGNMENT.endsWith(eventName)) {
+            System.out.println("assignment========="+delegateTask.getTaskDefinitionKey());
+        } else if (TaskListener.EVENTNAME_COMPLETE.endsWith(eventName)) {
+            System.out.println("complete==========="+delegateTask.getTaskDefinitionKey());
+        } else if (TaskListener.EVENTNAME_DELETE.endsWith(eventName)) {
+            System.out.println("delete============="+delegateTask.getTaskDefinitionKey());
         }
     }
 }
