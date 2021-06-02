@@ -129,37 +129,17 @@ public class TestTaskService {
         List<HistoricTaskInstance> hisList2 = historyService.createHistoricTaskInstanceQuery().processInstanceId(pid3).finished().orderByTaskCreateTime().desc().list();
     }
     @Test
-    public void taskCreateTest(){
-
-//        String s = "a.b";
-//        String[] a = s.split("[.]");
-//        System.out.println(a);
+    public void testListener(){
         Map<String, Object> vars = new HashMap<>(); //参数
         vars.put("assignee","haha");
         ProcessInstance processInstance = runtimeService.startProcessInstanceByKey("bananaDiagram",vars);
         List<Task> taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
-//        List<String> candidateList = new ArrayList<>();
-//        candidateList.add("a1,a2,a3");
-//        candidateList.add("b1,b2");
-//        vars = new HashMap<>();
-//        vars.put("candidateList",candidateList);
-//        taskService.setAssignee(taskList.get(0).getId(),"haha");
-//        taskService.delegateTask(taskList.get(0).getId(),"xixi");
-//        taskService.delegateTask(taskList.get(0).getId(),"hehe");
-//        taskService.delegateTask(taskList.get(0).getId(),"heihei");
-//        taskService.resolveTask(taskList.get(0).getId());
+        System.out.println("===complete==="+taskList.get(0).getTaskDefinitionKey());
         taskService.complete(taskList.get(0).getId(),vars);
+        System.out.println("===completeDown==="+taskList.get(0).getTaskDefinitionKey());
         taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
+        System.out.println("===complete==="+taskList.get(0).getTaskDefinitionKey());
         taskService.complete(taskList.get(0).getId(),vars);
-        taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
-        taskService.complete(taskList.get(0).getId(),vars);
-//        taskList = taskService.createTaskQuery().processInstanceId(processInstance.getId()).list();
-//        vars = new HashMap<>();
-//        vars.put("action","R");
-//        taskService.complete(taskList.get(0).getId(),vars);
-//        vars.put("candidater", "e,f,g");
-//        taskService.complete(task.getId(),vars);
-
-
+        System.out.println("===completeDown==="+taskList.get(0).getTaskDefinitionKey());
     }
 }
