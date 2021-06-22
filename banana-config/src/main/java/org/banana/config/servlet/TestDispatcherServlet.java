@@ -1,6 +1,8 @@
 package org.banana.config.servlet;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import org.apache.commons.beanutils.BeanUtils;
 import org.banana.common.annotation.Function;
 import org.banana.common.annotation.Functions;
@@ -101,7 +103,8 @@ public class TestDispatcherServlet extends HttpServlet {
         }
         Map<String,Object> reply = new HashMap<>();
         reply.put("reply",result);
-        resp.getWriter().println(JSONObject.toJSONString(reply));
+        resp.getWriter().println(JSON.toJSONString(reply, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue,
+                SerializerFeature.WriteDateUseDateFormat));
 //        try{
 //            writer = resp.getWriter();
 //            writer.write();
