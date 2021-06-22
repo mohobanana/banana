@@ -30,16 +30,24 @@ import java.util.concurrent.ConcurrentHashMap;
 public class TestDispatcherServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(TestDispatcherServlet.class);
 
-    // springmvc 容器对象 key:请求地址 ,value 类
+    /**
+     * springmvc 容器对象 key:请求地址 ,value 类
+     */
     private ConcurrentHashMap<String, String> urlClass = new ConcurrentHashMap<String, String>();
 
-    // springmvc 容器对象 key:方法 ,value 类
+    /**
+     * springmvc 容器对象 key:方法 ,value 类
+     */
     private ConcurrentHashMap<String, Object> methodFunctionMap = new ConcurrentHashMap<String, Object>();
 
-    // springmvc 容器对象 key:方法 ,value 方法类
+    /**
+     * springmvc 容器对象 key:方法 ,value 方法类
+     */
     private ConcurrentHashMap<String, Method> methodMap = new ConcurrentHashMap<String, Method>();
 
-    // spring 上下文
+    /**
+     * spring 上下文
+     */
     ApplicationContext ac = null;
 
 
