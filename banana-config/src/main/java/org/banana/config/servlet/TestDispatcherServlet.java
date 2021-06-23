@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.lang.reflect.Method;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -33,17 +34,17 @@ public class TestDispatcherServlet extends HttpServlet {
     /**
      * springmvc 容器对象 key:请求地址 ,value 类
      */
-    private ConcurrentHashMap<String, String> urlClass = new ConcurrentHashMap<String, String>();
+    private ConcurrentHashMap<String, String> urlClass = new ConcurrentHashMap<>();
 
     /**
      * springmvc 容器对象 key:方法 ,value 类
      */
-    private ConcurrentHashMap<String, Object> methodFunctionMap = new ConcurrentHashMap<String, Object>();
+    private ConcurrentHashMap<String, Object> methodFunctionMap = new ConcurrentHashMap<>();
 
     /**
      * springmvc 容器对象 key:方法 ,value 方法类
      */
-    private ConcurrentHashMap<String, Method> methodMap = new ConcurrentHashMap<String, Method>();
+    private ConcurrentHashMap<String, Method> methodMap = new ConcurrentHashMap<>();
 
     /**
      * spring 上下文
@@ -52,12 +53,12 @@ public class TestDispatcherServlet extends HttpServlet {
 
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         ServletContext sc = this.getServletContext();
         ac = WebApplicationContextUtils.getRequiredWebApplicationContext(sc);
         Map<String, Object> functions = ac.getBeansWithAnnotation(Functions.class);
         for (Object function : functions.values()) {
-            Class functionClass = function.getClass();
+            Class<?> functionClass = function.getClass();
             Method[] methods = functionClass.getDeclaredMethods();
             for(Method method:methods){
                 if(method.getDeclaredAnnotation(Function.class)!=null){
@@ -69,12 +70,12 @@ public class TestDispatcherServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         doPost(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         String uri = req.getRequestURI();
         String contextPath = req.getContextPath();
         String methodName = uri.substring(uri.indexOf(contextPath)+contextPath.length()+1);
@@ -84,9 +85,9 @@ public class TestDispatcherServlet extends HttpServlet {
             logger.error("method not found:{}",methodName);
             resp.getWriter().println("method not found:"+methodName);
             return;
-        };
-        BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream(), "UTF-8"));
-        String line = null;
+        }
+        BufferedReader br = new BufferedReader(new InputStreamReader(req.getInputStream(), StandardCharsets.UTF_8));
+        String line;
         StringBuilder sb = new StringBuilder();
         while ((line = br.readLine()) != null) {
             sb.append(line);
@@ -95,7 +96,7 @@ public class TestDispatcherServlet extends HttpServlet {
         JSONObject jsonObject = JSONObject.parseObject(sb.toString());
         Map<String, String[]> reqMap = req.getParameterMap();
         Object result  = null;
-        Class[] classes = method.getParameterTypes();
+        Class<?>[] classes = method.getParameterTypes();
         Object reqParam = null;
         try {
             reqParam = classes[0].newInstance();

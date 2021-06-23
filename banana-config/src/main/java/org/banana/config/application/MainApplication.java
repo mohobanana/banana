@@ -13,6 +13,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
  **/
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class,scanBasePackages = "org.banana.demo")
+//扫描与web相关的注解@WebFilter、@WebServlet、@WebListener
 @ServletComponentScan(basePackages = "org.banana.config.servlet")
 @MapperScan(basePackages = {"org.banana.demo.mapper"})
 public class MainApplication {
