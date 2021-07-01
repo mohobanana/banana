@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  * Created by mskj-mohao on 2021/6/23 11:30 AM
  * Copr: © 2020 MSKJ.All rights reserved.
  **/
-public class StreamTest {
+public class CreateStreamTest {
 
     @Test
     public void test1(){

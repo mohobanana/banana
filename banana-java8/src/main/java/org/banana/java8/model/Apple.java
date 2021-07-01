@@ -1,5 +1,7 @@
 package org.banana.java8.model;
 
+import java.util.Objects;
+
 /**
  * Desc: Apple
  * Created by mskj-mohao on 2021/6/23 9:47 AM
@@ -30,5 +32,31 @@ public class Apple {
 
     public void setWeight(long weight) {
         this.weight = weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Apple apple = (Apple) o;
+        return weight == apple.weight &&
+                Objects.equals(color, apple.color);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(color, weight);
+    }
+
+    @Override
+    public String toString() {
+        return "Apple{" +
+                "color='" + color + '\'' +
+                ", weight=" + weight +
+                '}';
     }
 }
