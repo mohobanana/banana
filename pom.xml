@@ -13,6 +13,7 @@
         <module>banana-demo</module>
         <module>banana-config</module>
         <module>banana-api</module>
+        <module>banana-autoConfiguration</module>
     </modules>
 
     <parent>
