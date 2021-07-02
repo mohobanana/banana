@@ -15,7 +15,14 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MyProperties {
     private String name;
     private Integer number;
-    private boolean enabled;
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
+    }
 
     public String getName() {
         return name;

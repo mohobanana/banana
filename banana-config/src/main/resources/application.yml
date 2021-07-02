@@ -18,4 +18,6 @@ mybatis:
     map-underscore-to-camel-case: true
 
 banana:
-  enabled: false
+  name: haha
+  number: 25
+  enabled: true

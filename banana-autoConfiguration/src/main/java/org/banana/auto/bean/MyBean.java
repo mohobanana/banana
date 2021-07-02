@@ -13,7 +13,7 @@ public class MyBean {
 
     @PostConstruct
     private  void init(){
-        System.out.println("=======> MyBean被加载");
+        System.out.println("=======> MyBean被加载:"+this.toString());
     }
 
     public String getName() {
@@ -30,5 +30,13 @@ public class MyBean {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "MyBean{" +
+                "name='" + name + '\'' +
+                ", number=" + number +
+                '}';
     }
 }
