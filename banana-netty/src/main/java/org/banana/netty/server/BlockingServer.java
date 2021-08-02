@@ -1,4 +1,4 @@
-package org.banana.netty.blocking;
+package org.banana.netty.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,8 +11,8 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
-    private static Logger logger = LoggerFactory.getLogger(Server.class);
+public class BlockingServer {
+    private static Logger logger = LoggerFactory.getLogger(BlockingServer.class);
     public static void main(String[] args) throws IOException {
         //nio阻塞模式，单线程
         ByteBuffer byteBuffer = ByteBuffer.allocate(16);

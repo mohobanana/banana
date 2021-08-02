@@ -1,4 +1,4 @@
-package org.banana.netty.nonBlocking;
+package org.banana.netty.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +12,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Server {
-    private static Logger logger = LoggerFactory.getLogger(Server.class);
+public class NonBlockingServer {
+    private static Logger logger = LoggerFactory.getLogger(NonBlockingServer.class);
 
     public static void main(String[] args) throws IOException {
         //nio非阻塞模式，单线程
