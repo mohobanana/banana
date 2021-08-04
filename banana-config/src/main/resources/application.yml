@@ -16,3 +16,9 @@ mybatis:
   #开启驼峰命名
   configuration:
     map-underscore-to-camel-case: true
+
+
+logging:
+  level: debug
+  pattern:
+    console: [%-5p] %d{yyyy-MM-dd HH:mm:ss,SSS} method:%l%n%m%n

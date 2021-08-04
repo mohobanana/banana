@@ -1,4 +1,4 @@
-package org.banana.netty.server;
+package org.banana.nio.server;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,7 +11,6 @@ import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
 import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Iterator;
 
 public class WriteServer {

@@ -1,6 +1,6 @@
-package org.banana.netty.server;
+package org.banana.nio.server;
 
-import org.banana.netty.util.BufferUtil;
+import org.banana.nio.util.BufferUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
-import java.nio.charset.Charset;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicInteger;

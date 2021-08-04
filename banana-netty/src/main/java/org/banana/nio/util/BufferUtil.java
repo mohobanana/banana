@@ -1,6 +1,5 @@
-package org.banana.netty.util;
+package org.banana.nio.util;
 
-import org.banana.netty.server.SelectorServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

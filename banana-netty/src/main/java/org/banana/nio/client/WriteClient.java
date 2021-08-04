@@ -1,6 +1,6 @@
-package org.banana.netty.client;
+package org.banana.nio.client;
 
-import org.banana.netty.server.BlockingServer;
+import org.banana.nio.server.BlockingServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
