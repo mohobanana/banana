@@ -23,6 +23,7 @@
                   name="submit">
             <extensionElements>
                <activiti:executionListener event="start" delegateExpression="${myExecutionListener}"></activiti:executionListener>
+               <activiti:taskListener event="create" delegateExpression="${myExecutionListener}"></activiti:taskListener>
             </extensionElements>
         </userTask>
         <sequenceFlow id="_5" sourceRef="_2" targetRef="submit"/>

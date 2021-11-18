@@ -40,9 +40,9 @@ public class TestRuntimeService {
 //        long count = runtimeService.createProcessInstanceQuery().processDefinitionKey("bananaDiagram").count();
         Map<String,Object> variables = new HashMap<>();
         //变量放置在实例全局变量中
-        variables.put("CandidateUser","tester");
-        variables.put("candidateGroup","group1,group2");
-        runtimeService.startProcessInstanceByKey("myProcess_3",variables);
+        variables.put("assignee","tester");
+        variables.put("groupId","group1,group2");
+        ProcessInstance myProcess_3 = runtimeService.startProcessInstanceByKey("myProcess_3", variables);
 //        count = runtimeService.createProcessInstanceQuery().processDefinitionKey("bananaDiagram").count()-count;
 //        Assert.isTrue(count == 1);
     }
