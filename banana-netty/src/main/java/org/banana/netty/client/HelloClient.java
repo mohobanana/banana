@@ -1,10 +1,8 @@
 package org.banana.netty.client;
 
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
-import io.netty.channel.ChannelFutureListener;
-import io.netty.channel.ChannelInitializer;
+import io.netty.buffer.ByteBuf;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.string.StringEncoder;
@@ -13,7 +11,10 @@ import org.banana.netty.server.HelloServer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.charset.Charset;
+import java.util.Scanner;
 
 public class HelloClient {
     private static final Logger logger = LoggerFactory.getLogger(HelloServer.class);
@@ -34,12 +35,17 @@ public class HelloClient {
                         //6.添加handler
                         nioSocketChannel.pipeline().addLast(new LoggingHandler("INFO"));
                         nioSocketChannel.pipeline().addLast(new StringEncoder()); //添加编码器
+                        nioSocketChannel.pipeline().addLast(new ChannelOutboundHandlerAdapter(){
+                            @Override
+                            public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
+                                logger.info("sending msg:{}",msg);
+                                super.write(ctx, msg, promise);
+                            }
+                        });
                     }
                 })
                 //6.连接到服务器
-                .connect(new InetSocketAddress("localhost", 8080));
-        channelFuture.sync(); //阻塞直到建立连接
-
+                .connect(new InetSocketAddress("localhost", 16000));
         Channel channel = channelFuture.channel();//连接对象
         channel.closeFuture().addListener(new ChannelFutureListener() {
             @Override
@@ -48,7 +54,12 @@ public class HelloClient {
                 group.shutdownGracefully();
             }
         });
-        channel.writeAndFlush("hello world");//7.写入数据
+        channelFuture.sync(); //阻塞直到建立连接
+        logger.info("connected");
+
+        Scanner scanner = new Scanner(System.in);
+        channel.writeAndFlush(scanner.nextLine());//7.写入数据
+
         channel.close();
     }
 }
