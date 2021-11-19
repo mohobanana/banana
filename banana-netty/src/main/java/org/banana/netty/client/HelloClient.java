@@ -5,6 +5,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.handler.logging.LoggingHandler;
 import org.banana.netty.server.HelloServer;
@@ -32,6 +33,15 @@ public class HelloClient {
                     //5.channel 初始化和客户端数据读写的通道，负责添加别的handler
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
+                        //6.添加inboundHandler
+                        nioSocketChannel.pipeline().addLast(new StringDecoder()); //将ByteBuf转为String
+                        nioSocketChannel.pipeline().addLast(new ChannelInboundHandlerAdapter() { //自定义handler
+                            @Override
+                            public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
+                                logger.info(msg.toString());
+                                super.channelRead(ctx, msg);
+                            }
+                        });
                         //6.添加handler
                         nioSocketChannel.pipeline().addLast(new LoggingHandler("INFO"));
                         nioSocketChannel.pipeline().addLast(new StringEncoder()); //添加编码器
@@ -60,6 +70,6 @@ public class HelloClient {
         Scanner scanner = new Scanner(System.in);
         channel.writeAndFlush(scanner.nextLine());//7.写入数据
 
-        channel.close();
+//        channel.close();
     }
 }
