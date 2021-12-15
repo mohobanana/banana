@@ -1,14 +1,12 @@
 package org.banana.demo.service.impl;
 
 import org.banana.api.dto.TestFunctionOutDto;
-import org.banana.demo.service.TestService;
+import org.banana.demo.service.DemoService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 @Service
-public class TestServiceImpl implements TestService {
+public class DemoServiceImpl implements DemoService {
 
-    @Transactional()
     @Override
     public TestFunctionOutDto testMethod(String msg) {
         TestFunctionOutDto outDto = new TestFunctionOutDto();
