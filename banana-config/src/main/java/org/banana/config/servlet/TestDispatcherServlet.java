@@ -27,7 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-@WebServlet(name = "banana", urlPatterns = "/*")
+@WebServlet(name = "banana", urlPatterns = "/*", loadOnStartup = 1)
 public class TestDispatcherServlet extends HttpServlet {
     private static Logger logger = LoggerFactory.getLogger(TestDispatcherServlet.class);
 
