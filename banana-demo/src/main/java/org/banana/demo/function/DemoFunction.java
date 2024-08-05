@@ -4,6 +4,7 @@ import org.banana.api.dto.TestFunctionInDto;
 import org.banana.api.dto.TestFunctionOutDto;
 import org.banana.common.annotation.Function;
 import org.banana.common.annotation.Functions;
+import org.banana.common.annotation.Notification;
 import org.banana.demo.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,7 +14,13 @@ public class DemoFunction {
     private DemoService demoService;
 
     @Function
+    @Notification(person = {"haha"}, msg = "hah")
     public TestFunctionOutDto testFunction(TestFunctionInDto inDto){
         return demoService.testMethod(inDto.getMsg());
+    }
+
+    @Function
+    public TestFunctionOutDto testFunction1(TestFunctionInDto inDto){
+        return null;
     }
 }

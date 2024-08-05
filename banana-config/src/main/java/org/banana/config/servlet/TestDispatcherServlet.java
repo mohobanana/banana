@@ -9,7 +9,9 @@ import org.banana.common.annotation.Functions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -61,7 +63,7 @@ public class TestDispatcherServlet extends HttpServlet {
             Class<?> functionClass = function.getClass();
             Method[] methods = functionClass.getDeclaredMethods();
             for(Method method:methods){
-                if(method.getDeclaredAnnotation(Function.class)!=null){
+                if(AnnotationUtils.findAnnotation(method, Function.class)!=null){
                     methodMap.put(method.getName(),method);
                     methodFunctionMap.put(method.getName(),function);
                 }
@@ -92,15 +94,12 @@ public class TestDispatcherServlet extends HttpServlet {
         while ((line = br.readLine()) != null) {
             sb.append(line);
         }
-        br.close();
-        JSONObject jsonObject = JSONObject.parseObject(sb.toString());
         Map<String, String[]> reqMap = req.getParameterMap();
         Object result  = null;
         Class<?>[] classes = method.getParameterTypes();
         Object reqParam = null;
         try {
             reqParam = classes[0].newInstance();
-            BeanUtils.populate(reqParam,jsonObject);
             BeanUtils.populate(reqParam,reqMap);
         } catch (Exception e) {
             e.printStackTrace();
