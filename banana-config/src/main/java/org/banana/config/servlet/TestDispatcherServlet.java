@@ -112,6 +112,8 @@ public class TestDispatcherServlet extends HttpServlet {
         }
         Map<String,Object> reply = new HashMap<>();
         reply.put("reply",result);
+        resp.setContentType("application/json;charset=UTF-8");
+        resp.setCharacterEncoding("UTF-8");
         resp.getWriter().println(JSON.toJSONString(reply, SerializerFeature.PrettyFormat, SerializerFeature.WriteMapNullValue,
                 SerializerFeature.WriteDateUseDateFormat));
 //        try{

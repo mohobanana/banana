@@ -16,4 +16,12 @@ public class DemoFunction {
     public TestFunctionOutDto testFunction(TestFunctionInDto inDto){
         return demoService.testMethod(inDto.getMsg());
     }
+    @Function
+    public String getToken(TestFunctionInDto inDto){
+        return demoService.getToken();
+    }
+    @Function
+    public String getGrade(TestFunctionInDto inDto){
+        return demoService.getGrade(inDto.getMsg());
+    }
 }

@@ -12,6 +12,12 @@ spring:
     port: 6379
     database: 0
     password:
+coze:
+  clientId: 1180692229224
+  jwt:
+    publicKey:
+    oauthUrl: https://api.coze.cn/zpi/permission/oauth2/token/
+  workflowUrl: https://api.coze.cn/v1/workflow/run/
 
 #mybatis的相关配置
 mybatis:
@@ -26,3 +32,9 @@ banana:
   name: haha
   number: 25
   enabled: true
+
+deepseek:
+  api:
+    key:
+    base-url: https://api.deepseek.com
+    timeout: 30000
